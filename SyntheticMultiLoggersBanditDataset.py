@@ -69,7 +69,7 @@ class SyntheticMultiLoggersBanditDataset(SyntheticBanditDataset):
         leading to some bias for IPW-type estimators. See Sachdeva et al.(2020) for details.
         `n_deficient_actions` should be an integer smaller than `n_actions - 1` so that there exists at least one action
         that have a positive probability of being selected by the behavior policy.
-    random_state: int, default=12345
+    random_state: int, default=42
         Controls the random seed in sampling synthetic bandit data.
     dataset_name: str, default='synthetic_bandit_dataset'
         Name of the dataset.
@@ -145,7 +145,7 @@ class SyntheticMultiLoggersBanditDataset(SyntheticBanditDataset):
                  reward_type=RewardType.BINARY
                  ):
         self.betas: List[Union[int, float]] = betas
-        self.rhos: List[float] = rhos
+        self.rhos: List[Union[int, float]] = rhos
         self.n_deficient_actions: int = n_deficient_actions
         self.reward_std: float = reward_std
         self.action_context: np.ndarray = action_context

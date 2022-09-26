@@ -136,14 +136,20 @@ class SyntheticMultiLoggersBanditDataset(SyntheticBanditDataset):
     "Optimal Off-Policy Evaluation from Multiple Logging Policies.", 2020.
     """
 
-    def __init__(self, n_actions=100, dim_context=1, reward_function=None, random_state=42,
-                 betas=None,
-                 rhos=None,
-                 n_deficient_actions=0,
-                 reward_std=1.0,
-                 action_context=None,
-                 reward_type=RewardType.BINARY
-                 ):
+    def __init__(
+            self,
+            n_actions=100,
+            dim_context=1,
+            reward_function=None,
+            random_state=42,
+            betas=None,
+            rhos=None,
+            n_deficient_actions=0,
+            reward_std=1.0,
+            action_context=None,
+            reward_type=RewardType.BINARY,
+            behavior_policy_function=None  # currently not implemented
+            ):
         self.betas: List[Union[int, float]] = betas
         self.rhos: List[Union[int, float]] = rhos
         self.n_deficient_actions: int = n_deficient_actions
@@ -151,7 +157,7 @@ class SyntheticMultiLoggersBanditDataset(SyntheticBanditDataset):
         self.action_context: np.ndarray = action_context
         self.reward_type = reward_type
         self.reward_function = reward_function
-        self.behavior_policy = None
+        self.behavior_policy_function = behavior_policy_function
         self.random_state = random_state
         super(SyntheticMultiLoggersBanditDataset, self).__init__(
             n_actions,
